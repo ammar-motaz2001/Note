@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { RouterProvider, createBrowserRouter, createHashRouter } from 'react-router-dom'
+import Layout from './component/Layout/Layout'
+// import register from './component/register/register'
+import Signin from './component/Signin/signin'
+import Home from './component/Home/Home'
+import Register from './component/Register/register'
+import { RecoilRoot } from 'recoil'
+import Layput from './component/LayoutTwo/Layput'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+
+
+ const routes= createHashRouter([
+    {path:'',element:<Layout/>,children:[
+      
+      {path:"Home",element:<Home/>}
+    ]
+    },
+
+    {path:'',element:<Layput/>,children:[
+      {path:'register',element:<Register/>},
+      {index:true,element:<Signin/>},
+    ]}
+
+  ])
+  return <>
+    <RecoilRoot>
+    <RouterProvider router={routes}/>
+    </RecoilRoot>
+    </>
+  
 }
-
-export default App;
